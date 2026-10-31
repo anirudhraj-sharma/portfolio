@@ -1,0 +1,58 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Read-only by default; the deploy job asks for the two extra scopes it needs.
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          package-manager-cache: false # no dependency cache on the release path
+      - run: npm ci --ignore-scripts
+      - run: npm audit signatures
+      - run: npm audit --audit-level=high
+      - run: npm run lint
+      # `npm run build` runs next build, then scripts/csp.mjs.
+      - run: npm run build
+      - name: Check every page carries the CSP meta
+        run: |
+          missing=$(grep -RL 'http-equiv="Content-Security-Policy"' out --include='*.html' || true)
+          if [ -n "$missing" ]; then echo "CSP meta missing in: $missing"; exit 1; fi
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    # A manual run from another branch still builds, but only main publishes.
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
