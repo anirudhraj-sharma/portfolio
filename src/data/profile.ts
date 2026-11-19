@@ -346,10 +346,10 @@ export const experience: Experience[] = [
     end: "2023-10",
     location: "Remote",
     bullets: [
-      "Built Python network protocol architectures for transit systems on AWS with Spark, cutting critical alert delivery time by 20%.",
-      "Designed and automated a preventive maintenance schedule with Airflow, BigQuery, and Terraform, cutting critical network failures by 40% across 15+ nodes while maintaining 99.5% uptime.",
+      "Built concurrent Python health-check scripts on flock-locked cron across 15+ network nodes, polling PostgreSQL and TCP sockets every 5 minutes to flag silent telemetry feed stalls, with per-poll timeouts to prevent DB connection exhaustion.",
+      "Validated live NOC monitoring dashboards against REST API responses and SQL rows before client releases, catching null-to-zero serialization bugs, UTC/IST timezone offsets, and outdated device status badges.",
     ],
-    tech: ["Python", "AWS", "Spark", "Airflow", "BigQuery", "Terraform"],
+    tech: ["Python", "PostgreSQL", "SQL", "cron", "TCP sockets", "REST APIs"],
   },
   {
     org: "IBM",
