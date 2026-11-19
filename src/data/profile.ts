@@ -331,7 +331,7 @@ export const experience: Experience[] = [
     end: "2026-05",
     location: "Buffalo, NY",
     bullets: [
-      "Co-built Socratic-OT, a multimodal tutor for UB Occupational Therapy students: a 20-node LangGraph app with FastAPI streaming and a Next.js front end, where answer reveals are gated in Python code, not just prompts.",
+      "Developed Socratic-OT, a multimodal tutor for UB Occupational Therapy students: a 20-node LangGraph app with FastAPI streaming and a Next.js front end, where answer reveals are gated in Python code, not just prompts.",
       "Passed 116 of 119 live multi-turn end-to-end scenarios, including 5 of 5 jailbreak attempts, and 10 of 10 after swapping in a physics textbook.",
       "A critic loop raised LLM-judged faithfulness from 0.81 to 0.91 on 50 offline prompts, past the 0.85 target.",
     ],
@@ -510,7 +510,7 @@ export const featuredProjects: FeaturedProject[] = [
     title: "Socratic-OT",
     subtitle: "Multimodal tutor for Occupational Therapy students",
     category: "LLM application",
-    role: "Co-built, as a volunteer Research Assistant",
+    role: "Built as a volunteer Research Assistant",
     period: "Jan 2026 – May 2026",
     tagline:
       "A tutor for UB Occupational Therapy students that guides them to the answer instead of handing it over.",
@@ -949,7 +949,7 @@ export const education: Education[] = [
   {
     school: "University of Petroleum and Energy Studies",
     degree: "B.Tech, Computer Science (AI Specialization)",
-    dates: "Apr 2019 – May 2023",
+    dates: "Jul 2019 – May 2023",
     location: "Dehradun, India",
   },
 ];
